@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1200">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+  <title>OG Image — Slayd by Jade</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html, body {
+      width: 1200px;
+      height: 630px;
+      overflow: hidden;
+      background: #080808;
+    }
+
+    .frame {
+      width: 1200px;
+      height: 630px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    /* Outer border */
+    .border {
+      position: absolute;
+      inset: 40px;
+      border: 1px solid rgba(201, 168, 76, 0.35);
+      pointer-events: none;
+    }
+
+    /* Corner ornaments */
+    .corner {
+      position: absolute;
+      width: 22px;
+      height: 22px;
+    }
+    .corner--tl { top: -1px;  left: -1px;  border-top: 1px solid #C9A84C; border-left: 1px solid #C9A84C; }
+    .corner--tr { top: -1px;  right: -1px; border-top: 1px solid #C9A84C; border-right: 1px solid #C9A84C; }
+    .corner--bl { bottom: -1px; left: -1px;  border-bottom: 1px solid #C9A84C; border-left: 1px solid #C9A84C; }
+    .corner--br { bottom: -1px; right: -1px; border-bottom: 1px solid #C9A84C; border-right: 1px solid #C9A84C; }
+
+    /* Content */
+    .content {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+    }
+
+    .eyebrow {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-style: italic;
+      font-size: 17px;
+      letter-spacing: 0.45em;
+      color: rgba(201, 168, 76, 0.65);
+      text-transform: lowercase;
+      margin-bottom: 22px;
+    }
+
+    .brand {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: 90px;
+      letter-spacing: 0.18em;
+      color: #C9A84C;
+      text-transform: uppercase;
+      line-height: 1;
+      margin-bottom: 30px;
+      text-indent: 0.18em; /* compensate letter-spacing on last char */
+    }
+
+    .rule-wrap {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 30px;
+    }
+    .rule {
+      width: 60px;
+      height: 1px;
+      background: linear-gradient(to right, transparent, #C9A84C);
+    }
+    .rule.rule--right {
+      background: linear-gradient(to left, transparent, #C9A84C);
+    }
+    .diamond {
+      width: 5px;
+      height: 5px;
+      background: #C9A84C;
+      transform: rotate(45deg);
+    }
+
+    .tagline {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: 15px;
+      letter-spacing: 0.5em;
+      color: rgba(201, 168, 76, 0.55);
+      text-transform: uppercase;
+      text-indent: 0.5em;
+    }
+  </style>
+</head>
+<body>
+  <div class="frame">
+    <div class="border">
+      <div class="corner corner--tl"></div>
+      <div class="corner corner--tr"></div>
+      <div class="corner corner--bl"></div>
+      <div class="corner corner--br"></div>
+    </div>
+
+    <div class="content">
+      <div class="eyebrow">by jade</div>
+      <div class="brand">Slayd</div>
+      <div class="rule-wrap">
+        <div class="rule"></div>
+        <div class="diamond"></div>
+        <div class="rule rule--right"></div>
+      </div>
+      <div class="tagline">Hair &middot; Beauty &middot; Luxury</div>
+    </div>
+  </div>
+</body>
+</html>
