@@ -1,4 +1,8 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
+
 /**
  * Template Name: Services Archive
  */
@@ -107,7 +111,7 @@ $booking = slaydbyjade_booking_url();
                                         </div>
                                         <p class="sbj-service-card__deposit"><?php echo esc_html( $svc['deposit'] ); ?> deposit · <?php echo esc_html( $svc['note'] ); ?></p>
                                     </div>
-                                    <a href="https://slaydbyjade.as.me/schedule/d993e0c2" class="sbj-btn sbj-btn--gold sbj-service-card__book" target="_blank" rel="noopener noreferrer">Book</a>
+                                    <a href="<?php echo esc_url( $booking ); ?>" class="sbj-btn sbj-btn--gold sbj-service-card__book" target="_blank" rel="noopener noreferrer">Book</a>
                                 </div>
                             <?php endforeach; ?>
                         </div>
@@ -116,10 +120,34 @@ $booking = slaydbyjade_booking_url();
             </div>
             <div class="sbj-services-list__cta">
                 <p class="sbj-services-list__cta-note">30+ styles available · pricing subject to change · consult required for specialty styles</p>
-                <a href="https://slaydbyjade.as.me/schedule/d993e0c2" class="sbj-btn sbj-btn--outline" target="_blank" rel="noopener noreferrer">View All &amp; Book on Acuity</a>
+                <a href="<?php echo esc_url( $booking ); ?>" class="sbj-btn sbj-btn--outline" target="_blank" rel="noopener noreferrer">View All &amp; Book on Acuity</a>
             </div>
         <?php endif; ?>
     </section>
+
+    <?php
+    $faq_items = get_field( 'faq_items' );
+    if ( $faq_items ) :
+    ?>
+    <section class="sbj-faq" aria-labelledby="sbj-faq-heading">
+        <div class="sbj-container">
+            <header class="sbj-section-header sbj-reveal">
+                <h2 class="sbj-section-title" id="sbj-faq-heading">FREQUENTLY ASKED QUESTIONS</h2>
+                <div class="sbj-section-divider" aria-hidden="true"></div>
+            </header>
+            <div class="sbj-faq__list">
+                <?php foreach ( $faq_items as $item ) :
+                    if ( empty( $item['faq_question'] ) ) continue;
+                ?>
+                <details class="sbj-faq__item">
+                    <summary class="sbj-faq__question"><?php echo esc_html( $item['faq_question'] ); ?></summary>
+                    <div class="sbj-faq__answer"><?php echo wp_kses_post( $item['faq_answer'] ); ?></div>
+                </details>
+                <?php endforeach; ?>
+            </div>
+        </div>
+    </section>
+    <?php endif; ?>
 
     <!-- SCHEDULING SECTION -->
     <section class="sbj-scheduling" id="book" aria-labelledby="sbj-scheduling-heading">

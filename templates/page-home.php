@@ -1,4 +1,8 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
+
 /**
  * Template Name: Home Page
  */
@@ -143,9 +147,34 @@ $instagram      = get_field( 'social_instagram', 'option' ) ?: 'https://www.inst
         <div class="sbj-container sbj-booking-cta__inner">
             <h2 class="sbj-booking-cta__heading" id="sbj-booking-heading">Ready to Get <span class="sbj-text-script">Slayed?</span></h2>
             <p class="sbj-booking-cta__sub">Book your appointment today — deposits required at booking.</p>
-            <a href="<?php echo $booking; ?>" class="sbj-btn sbj-btn--primary sbj-btn--lg" target="_blank" rel="noopener noreferrer">Book Your Appointment</a>
+            <a href="<?php echo esc_url( $booking ); ?>" class="sbj-btn sbj-btn--primary sbj-btn--lg" target="_blank" rel="noopener noreferrer">Book Your Appointment</a>
         </div>
     </section>
+
+
+    <?php
+    $faq_items = get_field( 'faq_items' );
+    if ( $faq_items ) :
+    ?>
+    <section class="sbj-faq" aria-labelledby="sbj-faq-heading">
+        <div class="sbj-container">
+            <header class="sbj-section-header">
+                <h2 class="sbj-section-title" id="sbj-faq-heading">FREQUENTLY ASKED QUESTIONS</h2>
+                <div class="sbj-section-divider" aria-hidden="true"></div>
+            </header>
+            <div class="sbj-faq__list">
+                <?php foreach ( $faq_items as $item ) :
+                    if ( empty( $item['faq_question'] ) ) continue;
+                ?>
+                <details class="sbj-faq__item">
+                    <summary class="sbj-faq__question"><?php echo esc_html( $item['faq_question'] ); ?></summary>
+                    <div class="sbj-faq__answer"><?php echo wp_kses_post( $item['faq_answer'] ); ?></div>
+                </details>
+                <?php endforeach; ?>
+            </div>
+        </div>
+    </section>
+    <?php endif; ?>
 
 </main>
 

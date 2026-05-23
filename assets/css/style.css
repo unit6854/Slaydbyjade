@@ -1,3 +1,4 @@
+/* CRITICAL */
 /* ============================================================
    SLAYD BY JADE — Main Stylesheet v2
    Premium luxury beauty brand. All hex values defined at :root.
@@ -2166,4 +2167,91 @@ address { font-style: normal; }
     opacity: 0;
     transition: opacity 0.45s ease;
     will-change: left, top;
+}
+
+/* ============================================================
+   FAQ SECTION
+   ============================================================ */
+.sbj-faq {
+    padding: var(--space-2xl) 0;
+}
+
+.sbj-faq__list {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.sbj-faq__item {
+    border: 1px solid var(--color-white-faint);
+    border-radius: 4px;
+    background: var(--color-black-card);
+    overflow: hidden;
+    transition: border-color 0.2s ease;
+}
+
+.sbj-faq__item[open] {
+    border-color: var(--color-gold-muted);
+}
+
+.sbj-faq__question {
+    list-style: none;
+    cursor: pointer;
+    padding: var(--space-md) var(--space-lg);
+    font-family: var(--font-caps);
+    font-size: var(--fs-sm);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-white);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-sm);
+    transition: color 0.2s ease;
+}
+
+.sbj-faq__question::-webkit-details-marker {
+    display: none;
+}
+
+.sbj-faq__question::after {
+    content: '+';
+    font-size: 1.25rem;
+    font-weight: 300;
+    color: var(--color-gold);
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+}
+
+.sbj-faq__item[open] .sbj-faq__question::after {
+    transform: rotate(45deg);
+}
+
+.sbj-faq__answer {
+    padding: 0 var(--space-lg) var(--space-md);
+    font-family: var(--font-body);
+    font-size: var(--fs-sm);
+    color: var(--color-white-dim);
+    line-height: 1.7;
+}
+
+.sbj-faq__answer p {
+    margin: 0 0 var(--space-xs);
+}
+
+.sbj-faq__answer p:last-child {
+    margin-bottom: 0;
+}
+
+@media (max-width: 600px) {
+    .sbj-faq__question {
+        padding: var(--space-sm) var(--space-md);
+        font-size: var(--fs-xs);
+    }
+    .sbj-faq__answer {
+        padding: 0 var(--space-md) var(--space-sm);
+    }
 }

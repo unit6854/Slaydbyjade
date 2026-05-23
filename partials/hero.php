@@ -1,4 +1,8 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
+
 $eyebrow     = get_field( 'hero_eyebrow' );
 $headline    = get_field( 'hero_headline' )    ?: 'Your Vision. Perfected.';
 $hero_sub    = get_field( 'hero_subheadline' ) ?: 'Premium protective styling, crafted with precision and care — exclusively for you.';

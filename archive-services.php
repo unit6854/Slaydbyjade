@@ -1,4 +1,8 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
+
 /*
  * WordPress CPT archive template for 'services'.
  * The template hierarchy requires this file in the theme root.

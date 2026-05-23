@@ -1,4 +1,8 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
+
 /*
  * WordPress CPT archive template for 'gallery_item'.
  * Template hierarchy requires this file in the theme root.

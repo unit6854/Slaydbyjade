@@ -1,4 +1,8 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
+
 $instagram   = get_field( 'social_instagram', 'option' );
 $facebook    = get_field( 'social_facebook',  'option' );
 $tiktok      = get_field( 'social_tiktok',    'option' );
@@ -41,7 +45,7 @@ $booking    = slaydbyjade_booking_url();
                     ?>
                 </div>
                 <?php if ( $booking ) : ?>
-                    <a href="<?php echo $booking; ?>" class="sbj-btn sbj-btn--primary sbj-footer__book-btn" target="_blank" rel="noopener noreferrer">Book Now</a>
+                    <a href="<?php echo esc_url( $booking ); ?>" class="sbj-btn sbj-btn--primary sbj-footer__book-btn" target="_blank" rel="noopener noreferrer">Book Now</a>
                 <?php endif; ?>
             </div>
         </div>

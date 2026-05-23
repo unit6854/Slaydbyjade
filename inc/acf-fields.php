@@ -1,4 +1,8 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
+
 // ACF local JSON sync — enables field group versioning via Git.
 add_filter( 'acf/settings/save_json', function() {
     return get_stylesheet_directory() . '/acf-json';
@@ -215,6 +219,48 @@ function slaydbyjade_register_acf_fields() {
                 'type'  => 'text',
                 'instructions' => 'e.g. Your luxury protective style experience awaits.',
             ],
+            // SEO
+            [
+                'key'          => 'field_home_seo_title',
+                'label'        => 'SEO Title',
+                'name'         => 'seo_title',
+                'type'         => 'text',
+                'instructions' => 'Overrides the browser tab title. Leave blank to use the page title.',
+            ],
+            [
+                'key'          => 'field_home_seo_description',
+                'label'        => 'SEO Description',
+                'name'         => 'seo_description',
+                'type'         => 'textarea',
+                'rows'         => 2,
+                'maxlength'    => 160,
+                'instructions' => 'Meta description shown in search results. Max 160 characters.',
+            ],
+            // FAQ
+            [
+                'key'          => 'field_home_faq_items',
+                'label'        => 'FAQ Items',
+                'name'         => 'faq_items',
+                'type'         => 'repeater',
+                'instructions' => 'Questions and answers displayed on the page and in Google\'s FAQ rich result.',
+                'min'          => 0,
+                'layout'       => 'block',
+                'sub_fields'   => [
+                    [
+                        'key'   => 'field_home_faq_question',
+                        'label' => 'Question',
+                        'name'  => 'faq_question',
+                        'type'  => 'text',
+                    ],
+                    [
+                        'key'   => 'field_home_faq_answer',
+                        'label' => 'Answer',
+                        'name'  => 'faq_answer',
+                        'type'  => 'textarea',
+                        'rows'  => 3,
+                    ],
+                ],
+            ],
         ],
         'location' => [
             [ [ 'param' => 'page_template', 'operator' => '==', 'value' => 'templates/page-home.php' ] ],
@@ -280,6 +326,22 @@ function slaydbyjade_register_acf_fields() {
                 'return_format' => 'array',
                 'preview_size'  => 'medium',
             ],
+            [
+                'key'          => 'field_service_seo_title',
+                'label'        => 'SEO Title',
+                'name'         => 'seo_title',
+                'type'         => 'text',
+                'instructions' => 'Overrides the browser tab title. Leave blank to use the service title.',
+            ],
+            [
+                'key'          => 'field_service_seo_description',
+                'label'        => 'SEO Description',
+                'name'         => 'seo_description',
+                'type'         => 'textarea',
+                'rows'         => 2,
+                'maxlength'    => 160,
+                'instructions' => 'Meta description shown in search results. Max 160 characters.',
+            ],
         ],
         'location' => [
             [ [ 'param' => 'post_type', 'operator' => '==', 'value' => 'services' ] ],
@@ -308,6 +370,22 @@ function slaydbyjade_register_acf_fields() {
                 'label' => 'Caption (optional)',
                 'name'  => 'gallery_item_caption',
                 'type'  => 'text',
+            ],
+            [
+                'key'          => 'field_gallery_seo_title',
+                'label'        => 'SEO Title',
+                'name'         => 'seo_title',
+                'type'         => 'text',
+                'instructions' => 'Overrides the browser tab title.',
+            ],
+            [
+                'key'          => 'field_gallery_seo_description',
+                'label'        => 'SEO Description',
+                'name'         => 'seo_description',
+                'type'         => 'textarea',
+                'rows'         => 2,
+                'maxlength'    => 160,
+                'instructions' => 'Meta description shown in search results. Max 160 characters.',
             ],
         ],
         'location' => [
@@ -342,9 +420,109 @@ function slaydbyjade_register_acf_fields() {
                 'type'  => 'textarea',
                 'rows'  => 3,
             ],
+            [
+                'key'          => 'field_contact_seo_title',
+                'label'        => 'SEO Title',
+                'name'         => 'seo_title',
+                'type'         => 'text',
+                'instructions' => 'Overrides the browser tab title.',
+            ],
+            [
+                'key'          => 'field_contact_seo_description',
+                'label'        => 'SEO Description',
+                'name'         => 'seo_description',
+                'type'         => 'textarea',
+                'rows'         => 2,
+                'maxlength'    => 160,
+                'instructions' => 'Meta description shown in search results. Max 160 characters.',
+            ],
         ],
         'location' => [
             [ [ 'param' => 'page_template', 'operator' => '==', 'value' => 'templates/page-contact.php' ] ],
+        ],
+        'menu_order' => 0,
+    ] );
+
+    // -------------------------------------------------------
+    // FIELD GROUP: Services Archive Page Fields
+    // -------------------------------------------------------
+    acf_add_local_field_group( [
+        'key'    => 'group_services_archive',
+        'title'  => 'Services Archive',
+        'fields' => [
+            [
+                'key'          => 'field_svcarch_seo_title',
+                'label'        => 'SEO Title',
+                'name'         => 'seo_title',
+                'type'         => 'text',
+                'instructions' => 'Overrides the browser tab title.',
+            ],
+            [
+                'key'          => 'field_svcarch_seo_description',
+                'label'        => 'SEO Description',
+                'name'         => 'seo_description',
+                'type'         => 'textarea',
+                'rows'         => 2,
+                'maxlength'    => 160,
+                'instructions' => 'Meta description shown in search results. Max 160 characters.',
+            ],
+            [
+                'key'          => 'field_svcarch_faq_items',
+                'label'        => 'FAQ Items',
+                'name'         => 'faq_items',
+                'type'         => 'repeater',
+                'instructions' => 'Questions shown below the services list. Outputs FAQPage schema for Google.',
+                'min'          => 0,
+                'layout'       => 'block',
+                'sub_fields'   => [
+                    [
+                        'key'   => 'field_svcarch_faq_question',
+                        'label' => 'Question',
+                        'name'  => 'faq_question',
+                        'type'  => 'text',
+                    ],
+                    [
+                        'key'   => 'field_svcarch_faq_answer',
+                        'label' => 'Answer',
+                        'name'  => 'faq_answer',
+                        'type'  => 'textarea',
+                        'rows'  => 3,
+                    ],
+                ],
+            ],
+        ],
+        'location' => [
+            [ [ 'param' => 'page_template', 'operator' => '==', 'value' => 'templates/archive-services.php' ] ],
+        ],
+        'menu_order' => 0,
+    ] );
+
+    // -------------------------------------------------------
+    // FIELD GROUP: Gallery Page Fields
+    // -------------------------------------------------------
+    acf_add_local_field_group( [
+        'key'    => 'group_gallery_page',
+        'title'  => 'Gallery Page',
+        'fields' => [
+            [
+                'key'          => 'field_gallerypage_seo_title',
+                'label'        => 'SEO Title',
+                'name'         => 'seo_title',
+                'type'         => 'text',
+                'instructions' => 'Overrides the browser tab title.',
+            ],
+            [
+                'key'          => 'field_gallerypage_seo_description',
+                'label'        => 'SEO Description',
+                'name'         => 'seo_description',
+                'type'         => 'textarea',
+                'rows'         => 2,
+                'maxlength'    => 160,
+                'instructions' => 'Meta description shown in search results. Max 160 characters.',
+            ],
+        ],
+        'location' => [
+            [ [ 'param' => 'page_template', 'operator' => '==', 'value' => 'templates/page-gallery.php' ] ],
         ],
         'menu_order' => 0,
     ] );

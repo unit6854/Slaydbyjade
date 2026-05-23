@@ -1,4 +1,8 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
+
 $category    = get_field( 'service_category_label' );
 $duration    = get_field( 'service_duration' );
 $price       = get_field( 'service_price' );

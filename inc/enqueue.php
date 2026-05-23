@@ -1,7 +1,13 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
+
 function slaydbyjade_enqueue_assets() {
-    $ver = wp_get_theme()->get( 'Version' );
-    $dir = get_template_directory_uri();
+    $dir     = get_template_directory_uri();
+    $path    = get_template_directory();
+    $css_ver = filemtime( $path . '/assets/css/style.css' );
+    $js_ver  = filemtime( $path . '/assets/js/main.js' );
 
     // Google Fonts
     wp_enqueue_style(
@@ -11,11 +17,11 @@ function slaydbyjade_enqueue_assets() {
         null
     );
 
-    // Main stylesheet
-    wp_enqueue_style( 'slaydbyjade-style', $dir . '/assets/css/style.css', [ 'slaydbyjade-fonts' ], $ver );
+    // Main stylesheet — versioned by file modification time
+    wp_enqueue_style( 'slaydbyjade-style', $dir . '/assets/css/style.css', [ 'slaydbyjade-fonts' ], $css_ver );
 
-    // Main script
-    wp_enqueue_script( 'slaydbyjade-main', $dir . '/assets/js/main.js', [], $ver, true );
+    // Main script — versioned by file modification time, loaded in footer
+    wp_enqueue_script( 'slaydbyjade-main', $dir . '/assets/js/main.js', [], $js_ver, true );
 
     // Pass data to JS
     wp_localize_script( 'slaydbyjade-main', 'sbjData', [

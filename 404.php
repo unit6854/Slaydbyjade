@@ -1,3 +1,4 @@
+<?php if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 <?php get_template_part( 'partials/header' ); ?>
 <main class="sbj-main sbj-404">
     <div class="sbj-container">

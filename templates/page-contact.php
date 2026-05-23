@@ -1,4 +1,8 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
+
 /**
  * Template Name: Contact Page
  */
@@ -69,7 +73,7 @@ $booking    = slaydbyjade_booking_url();
             </ul>
 
             <?php if ( $booking ) : ?>
-                <a href="<?php echo $booking; ?>" class="sbj-btn sbj-btn--primary sbj-btn--lg" target="_blank" rel="noopener noreferrer">Book Your Appointment</a>
+                <a href="<?php echo esc_url( $booking ); ?>" class="sbj-btn sbj-btn--primary sbj-btn--lg" target="_blank" rel="noopener noreferrer">Book Your Appointment</a>
             <?php endif; ?>
         </div>
 

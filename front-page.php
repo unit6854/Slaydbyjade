@@ -1,4 +1,8 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
+
 // Loads the Home Page template when a static front page is set.
 // Template: templates/page-home.php (assigned in WP Admin → Settings → Reading)
 get_template_part( 'partials/header' );
@@ -213,9 +217,34 @@ $followers      = get_field( 'instagram_follower_count', 'option' );
             <div class="sbj-booking-cta__eyebrow" aria-hidden="true"></div>
             <h2 class="sbj-booking-cta__heading sbj-reveal" id="sbj-booking-heading"><?php echo esc_html( $cta_heading ); ?></h2>
             <p class="sbj-booking-cta__sub sbj-reveal"><?php echo esc_html( $cta_subtext ); ?></p>
-            <a href="<?php echo $booking; ?>" class="sbj-btn sbj-btn--primary sbj-btn--lg sbj-reveal" target="_blank" rel="noopener noreferrer">Book Your Appointment</a>
+            <a href="<?php echo esc_url( $booking ); ?>" class="sbj-btn sbj-btn--primary sbj-btn--lg sbj-reveal" target="_blank" rel="noopener noreferrer">Book Your Appointment</a>
         </div>
     </section>
+
+
+    <?php
+    $faq_items = get_field( 'faq_items' );
+    if ( $faq_items ) :
+    ?>
+    <section class="sbj-faq" aria-labelledby="sbj-faq-heading">
+        <div class="sbj-container">
+            <header class="sbj-section-header sbj-reveal">
+                <h2 class="sbj-section-title" id="sbj-faq-heading">FREQUENTLY ASKED QUESTIONS</h2>
+                <div class="sbj-section-divider" aria-hidden="true"></div>
+            </header>
+            <div class="sbj-faq__list">
+                <?php foreach ( $faq_items as $item ) :
+                    if ( empty( $item['faq_question'] ) ) continue;
+                ?>
+                <details class="sbj-faq__item">
+                    <summary class="sbj-faq__question"><?php echo esc_html( $item['faq_question'] ); ?></summary>
+                    <div class="sbj-faq__answer"><?php echo wp_kses_post( $item['faq_answer'] ); ?></div>
+                </details>
+                <?php endforeach; ?>
+            </div>
+        </div>
+    </section>
+    <?php endif; ?>
 
 </main>
 <?php get_template_part( 'partials/footer' ); ?>

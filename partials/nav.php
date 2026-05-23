@@ -1,4 +1,8 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
+
 $booking = slaydbyjade_booking_url();
 ?>
 <nav class="sbj-nav" id="sbj-nav" role="navigation" aria-label="Primary navigation">
@@ -24,7 +28,7 @@ $booking = slaydbyjade_booking_url();
     <!-- Book button + mobile toggle — far right -->
     <div class="sbj-nav__right">
         <?php if ( $booking ) : ?>
-            <a href="<?php echo $booking; ?>" class="sbj-btn sbj-btn--outline sbj-nav__book-btn" target="_blank" rel="noopener noreferrer">Book Now</a>
+            <a href="<?php echo esc_url( $booking ); ?>" class="sbj-btn sbj-btn--outline sbj-nav__book-btn" target="_blank" rel="noopener noreferrer">Book Now</a>
         <?php endif; ?>
         <button class="sbj-nav__toggle" id="sbj-nav-toggle" aria-expanded="false" aria-controls="sbj-nav-menu" aria-label="Toggle navigation">
             <span class="sbj-nav__toggle-bar"></span>

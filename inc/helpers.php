@@ -1,4 +1,7 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
 
 /**
  * Return the global booking URL — falls back to '#' if unset.
@@ -49,11 +52,16 @@ function slaydbyjade_logo( $class = 'sbj-logo__img' ) {
 function slaydbyjade_hero_image() {
     $img = get_field( 'hero_image' );
     if ( $img && ! empty( $img['ID'] ) ) {
-        echo wp_get_attachment_image( $img['ID'], 'sbj-hero', false, [ 'class' => 'sbj-hero__model-img', 'alt' => esc_attr( $img['alt'] ?: 'Slayd by Jade' ) ] );
+        echo wp_get_attachment_image( $img['ID'], 'sbj-hero', false, [
+            'class'         => 'sbj-hero__model-img',
+            'alt'           => esc_attr( $img['alt'] ?: 'Slayd by Jade' ),
+            'loading'       => 'eager',
+            'fetchpriority' => 'high',
+        ] );
     } else {
         $fallback = get_template_directory_uri() . '/assets/images/model-home.webp';
         /* Inline img fallback — documented exception: default hero model, no attachment ID until client uploads. */
-        echo '<img src="' . esc_url( $fallback ) . '" alt="Slayd by Jade hero model" class="sbj-hero__model-img" width="600" height="900">';
+        echo '<img src="' . esc_url( $fallback ) . '" alt="Slayd by Jade hero model" class="sbj-hero__model-img" width="600" height="900" loading="eager" fetchpriority="high">';
     }
 }
 

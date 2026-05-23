@@ -1,4 +1,8 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
+
 function slaydbyjade_register_cpts() {
 
     // --- Services CPT ---
