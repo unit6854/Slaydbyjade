@@ -1,0 +1,12 @@
+/* Minimal editor styles — keeps Gutenberg text readable in dark context */
+body.block-editor-page {
+    background: #111111;
+    color: #ffffff;
+    font-family: 'Lato', sans-serif;
+}
+
+.editor-styles-wrapper {
+    background: #111111;
+    color: #ffffffd9;
+    font-family: 'Lato', sans-serif;
+}
