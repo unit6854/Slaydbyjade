@@ -152,24 +152,16 @@ $followers      = get_field( 'instagram_follower_count', 'option' );
                 <div class="sbj-section-divider" aria-hidden="true"></div>
             </header>
             <?php
-            $gup       = wp_upload_dir();
-            $g_dir     = $gup['basedir'] . '/2026/05/';
-            $g_url     = $gup['baseurl'] . '/2026/05/';
-            $g_files   = glob( $g_dir . 'gallery-*.webp' );
-            if ( ! empty( $g_files ) ) {
-                sort( $g_files );
-                $g_files = array_slice( $g_files, 0, 9 );
-            }
-            if ( ! empty( $g_files ) ) :
+            $g_base    = get_template_directory_uri() . '/assets/images/gallery/';
+            $g_preview = [ 'gallery-1.webp', 'gallery-2.webp', 'gallery-3.webp', 'gallery-4.webp', 'gallery-5.webp', 'gallery-6.webp' ];
             ?>
                 <div class="sbj-gallery-grid sbj-gallery-grid--preview">
-                    <?php foreach ( $g_files as $i => $g_path ) :
-                        $g_img_url = $g_url . '/' . basename( $g_path );
+                    <?php foreach ( $g_preview as $i => $img ) :
+                        $g_img_url = $g_base . $img;
                         $g_alt     = 'Slayd by Jade — style ' . ( $i + 1 );
                     ?>
-                        <a href="<?php echo esc_url( $g_img_url ); ?>"
+                        <a href="<?php echo esc_url( home_url( '/gallery' ) ); ?>"
                            class="sbj-gallery-item sbj-reveal"
-                           target="_blank" rel="noopener noreferrer"
                            aria-label="<?php echo esc_attr( $g_alt ); ?>">
                             <img src="<?php echo esc_url( $g_img_url ); ?>"
                                  alt="<?php echo esc_attr( $g_alt ); ?>"
@@ -185,7 +177,6 @@ $followers      = get_field( 'instagram_follower_count', 'option' );
                 <div class="sbj-gallery-preview__cta">
                     <a href="<?php echo esc_url( home_url( '/gallery' ) ); ?>" class="sbj-btn sbj-btn--outline">View Full Gallery</a>
                 </div>
-            <?php endif; ?>
         </div>
     </section>
 

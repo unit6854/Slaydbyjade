@@ -8,20 +8,26 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 get_template_part( 'partials/header' );
 
-$uploads    = wp_upload_dir();
-$base_dir   = $uploads['basedir'] . '/2026/05/';
-$base_url   = $uploads['baseurl'] . '/2026/05/';
-$raw_files  = glob( $base_dir . 'gallery-*.webp' );
-$gallery    = [];
-if ( ! empty( $raw_files ) ) {
-    sort( $raw_files );
-    foreach ( $raw_files as $i => $path ) {
-        $gallery[] = [
-            'url' => $base_url . '/' . basename( $path ),
-            'alt' => 'Slayd by Jade — style ' . ( $i + 1 ),
-        ];
-    }
-}
+$subtext = get_field( 'gallery_subtext' ) ?: 'Protective styles crafted with care — every braid, every loc, every look.';
+$base    = get_template_directory_uri() . '/assets/images/gallery/';
+
+$images = [
+    'gallery-1.webp',
+    'gallery-2.webp',
+    'gallery-3.webp',
+    'gallery-4.webp',
+    'gallery-5.webp',
+    'gallery-6.webp',
+    'gallery-7.webp',
+    'gallery-8.webp',
+    'gallery-9.webp',
+    'gallery-10.webp',
+];
+
+$videos = [
+    'gallery-video-1.mp4',
+    'gallery-video-2.mp4',
+];
 ?>
 
 <main class="sbj-main sbj-gallery-page" id="main-content">
@@ -31,33 +37,48 @@ if ( ! empty( $raw_files ) ) {
             <p class="sbj-section-script">The Work</p>
             <h1 class="sbj-page-hero__title">GALLERY</h1>
             <div class="sbj-section-divider" aria-hidden="true"></div>
-            <p class="sbj-page-hero__sub">Protective styles crafted with care — every braid, every loc, every look.</p>
+            <p class="sbj-page-hero__sub"><?php echo esc_html( $subtext ); ?></p>
         </div>
     </section>
 
     <section class="sbj-gallery-full sbj-container" aria-label="Photo gallery">
-        <?php if ( ! empty( $gallery ) ) : ?>
-            <div class="sbj-gallery-grid sbj-gallery-grid--full">
-                <?php foreach ( $gallery as $i => $img ) : ?>
-                    <a href="<?php echo esc_url( $img['url'] ); ?>"
-                       class="sbj-gallery-item sbj-reveal"
-                       target="_blank"
-                       rel="noopener noreferrer"
-                       aria-label="<?php echo esc_attr( $img['alt'] ); ?>">
-                        <img src="<?php echo esc_url( $img['url'] ); ?>"
-                             alt="<?php echo esc_attr( $img['alt'] ); ?>"
-                             class="sbj-gallery-item__img"
-                             loading="lazy"
-                             decoding="async">
-                        <div class="sbj-gallery-item__overlay" aria-hidden="true">
-                            <svg class="sbj-gallery-item__zoom" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14zm2.5-4h-2v2H9v-2H7V9h2V7h1v2h2v1z"/></svg>
-                        </div>
-                    </a>
-                <?php endforeach; ?>
-            </div>
-        <?php else : ?>
-            <p class="sbj-no-results">Gallery photos coming soon.</p>
+
+        <div class="sbj-gallery-grid sbj-gallery-grid--full">
+            <?php foreach ( $images as $i => $img ) :
+                $url = $base . $img;
+                $alt = 'Slayd by Jade — style ' . ( $i + 1 );
+            ?>
+                <a href="<?php echo esc_url( $url ); ?>"
+                   class="sbj-gallery-item sbj-reveal"
+                   data-lightbox="gallery"
+                   aria-label="<?php echo esc_attr( $alt ); ?>">
+                    <img src="<?php echo esc_url( $url ); ?>"
+                         alt="<?php echo esc_attr( $alt ); ?>"
+                         class="sbj-gallery-item__img"
+                         loading="lazy"
+                         decoding="async">
+                    <div class="sbj-gallery-item__overlay" aria-hidden="true">
+                        <span class="sbj-gallery-item__view-label">View</span>
+                    </div>
+                </a>
+            <?php endforeach; ?>
+        </div>
+
+        <?php if ( ! empty( $videos ) ) : ?>
+        <div class="sbj-gallery-videos" aria-label="Video gallery">
+            <?php foreach ( $videos as $i => $vid ) :
+                $url = $base . $vid;
+            ?>
+                <div class="sbj-gallery-video sbj-reveal">
+                    <video controls preload="none" class="sbj-gallery-video__player"
+                           aria-label="Slayd by Jade — video <?php echo $i + 1; ?>">
+                        <source src="<?php echo esc_url( $url ); ?>" type="video/mp4">
+                    </video>
+                </div>
+            <?php endforeach; ?>
+        </div>
         <?php endif; ?>
+
     </section>
 
 </main>
