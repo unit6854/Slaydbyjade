@@ -26,3 +26,10 @@ jobs:
             **/.git*
             **/.git*/**
             **/node_modules/**
+
+      - name: Purge LiteSpeed Cache
+        run: |
+          curl -s -o /dev/null -w "%{http_code}" -X POST \
+            "https://slaydbyjade.com/wp-json/litespeed/v1/purge/all" \
+            -u "${{ secrets.WP_APP_USER }}:${{ secrets.WP_APP_PASSWORD }}" \
+            -H "Content-Type: application/json"
