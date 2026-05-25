@@ -152,7 +152,7 @@ $followers      = get_field( 'instagram_follower_count', 'option' );
                 <div class="sbj-section-divider" aria-hidden="true"></div>
             </header>
             <?php
-            $g_base    = get_template_directory_uri() . '/assets/images/gallery/';
+            $g_base    = content_url( 'uploads/2026/05/' );
             $g_preview = [ 'gallery-1.webp', 'gallery-2.webp', 'gallery-3.webp', 'gallery-4.webp', 'gallery-5.webp', 'gallery-6.webp' ];
             ?>
                 <div class="sbj-gallery-grid sbj-gallery-grid--preview">

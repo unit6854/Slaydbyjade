@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 get_template_part( 'partials/header' );
 
 $subtext = get_field( 'gallery_subtext' ) ?: 'Protective styles crafted with care — every braid, every loc, every look.';
-$base    = get_template_directory_uri() . '/assets/images/gallery/';
+$base    = content_url( 'uploads/2026/05/' );
 
 $images = [
     'gallery-1.webp',
