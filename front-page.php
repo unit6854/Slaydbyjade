@@ -35,10 +35,6 @@ $followers      = get_field( 'instagram_follower_count', 'option' );
                          alt="Jade Mobley — CEO, Slayd by Jade"
                          class="sbj-about__img sbj-about__img--ceo1"
                          width="900" height="1200">
-                    <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/ceo-2.webp' ); ?>"
-                         alt="Jade Mobley — Slayd by Jade"
-                         class="sbj-about__img sbj-about__img--ceo2"
-                         width="900" height="1200">
                 </div>
                 <div class="sbj-about__image-frame" aria-hidden="true"></div>
                 <div class="sbj-about__image-accent" aria-hidden="true"></div>
