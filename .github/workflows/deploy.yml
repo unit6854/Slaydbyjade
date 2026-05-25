@@ -29,6 +29,16 @@ jobs:
 
       - name: Purge LiteSpeed Cache
         run: |
-          curl -s -o /dev/null -w "%{http_code}" -X POST \
+          WP_CRED="slaydjade:${{ secrets.WP_APP_PASSWORD }}"
+          # Touch key pages so WordPress fires its cache-purge hooks
+          for PAGE_ID in 5 9; do
+            curl -s -o /dev/null -X POST \
+              "https://slaydbyjade.com/wp-json/wp/v2/pages/$PAGE_ID" \
+              -u "$WP_CRED" \
+              -H "Content-Type: application/json" \
+              -d "{\"date_modified\":\"$(date -u +%Y-%m-%dT%H:%M:%S)\"}"
+          done
+          # Also try the theme REST endpoint (works once OPcache validates)
+          curl -s -o /dev/null -X POST \
             "https://slaydbyjade.com/wp-json/slaydbyjade/v1/purge?key=${{ secrets.PURGE_KEY }}" \
             -H "Content-Type: application/json"
