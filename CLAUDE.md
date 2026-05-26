@@ -2,10 +2,12 @@
 
 ## How to Deploy PHP Changes to Live Site
 
-Git push → GitHub Actions FTP deploys to real path (fixed 2026-05-25):
+Git push → GitHub Actions FTP deploys to real path:
 `/home/u734858704/public_html/wp-content/themes/slaydbyjade/`
+GitHub secret `REMOTE_PATH` = `wp-content/themes/slaydbyjade/`
+(FTP root is already inside public_html — no prefix needed)
 
-After deploy, run **WP Admin → LiteSpeed Cache → Dashboard → Purge All** to clear page cache.
+After every deploy: **WP Admin → LiteSpeed Cache → Dashboard → Purge All** (clears OPcache + page cache — mandatory or PHP changes won't show).
 
 ### If a PHP change isn't showing after deploy:
 - Run Purge All in WP Admin → LiteSpeed Cache
