@@ -505,6 +505,21 @@ function slaydbyjade_register_acf_fields() {
         'title'  => 'Gallery Page',
         'fields' => [
             [
+                'key'          => 'field_foogallery_id',
+                'label'        => 'FooGallery ID',
+                'name'         => 'foogallery_id',
+                'type'         => 'text',
+                'instructions' => 'Paste the FooGallery gallery ID here (e.g. 128). Find it under FooGallery → Edit Gallery in the URL.',
+            ],
+            [
+                'key'   => 'field_gallerypage_subtext',
+                'label' => 'Subheading Text',
+                'name'  => 'gallery_subtext',
+                'type'  => 'text',
+                'instructions' => 'e.g. Protective styles crafted with care — every braid, every loc, every look.',
+                'default_value' => 'Protective styles crafted with care — every braid, every loc, every look.',
+            ],
+            [
                 'key'          => 'field_gallerypage_seo_title',
                 'label'        => 'SEO Title',
                 'name'         => 'seo_title',

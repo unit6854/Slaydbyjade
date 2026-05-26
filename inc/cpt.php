@@ -32,6 +32,7 @@ function slaydbyjade_register_cpts() {
     ] );
 
     // --- Gallery Item CPT ---
+    // has_archive disabled: gallery is now managed via ACF Gallery field on the Gallery page.
     register_post_type( 'gallery_item', [
         'labels' => [
             'name'               => __( 'Gallery',           'slaydbyjade' ),
@@ -40,14 +41,14 @@ function slaydbyjade_register_cpts() {
             'add_new_item'       => __( 'Add Gallery Item',  'slaydbyjade' ),
             'edit_item'          => __( 'Edit Gallery Item', 'slaydbyjade' ),
         ],
-        'public'            => true,
+        'public'            => false,
         'show_in_menu'      => true,
-        'has_archive'       => true,
+        'has_archive'       => false,
         'hierarchical'      => false,
         'menu_position'     => 6,
         'menu_icon'         => 'dashicons-format-gallery',
         'supports'          => [ 'title', 'thumbnail', 'page-attributes' ],
-        'rewrite'           => [ 'slug' => 'gallery', 'with_front' => false ],
+        'rewrite'           => false,
         'show_in_rest'      => false,
     ] );
 }
