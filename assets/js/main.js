@@ -1,6 +1,77 @@
 (function () {
     'use strict';
 
+    // ─── Gallery client-side render (bypasses LiteSpeed page cache) ──────────
+    // Runs before lightbox init so lightbox can attach to rendered elements.
+    (function renderGallery() {
+        var base = window.location.origin + '/wp-content/uploads/2026/05/';
+
+        // Gallery page — inject grid if stale ("coming soon") or missing
+        var gallerySection = document.querySelector('main.sbj-gallery-page .sbj-gallery-full');
+        if (gallerySection) {
+            var existingImg  = gallerySection.querySelector('img[src*="/gallery-"]');
+            var alreadyGood  = existingImg && /\/gallery-[1-9]\.webp/.test(existingImg.getAttribute('src'));
+            if (!alreadyGood) {
+                var imgs   = [1,2,3,4,5,6,7,8,9,10];
+                var videos = ['gallery-video-1.mp4','gallery-video-2.mp4'];
+                var grid   = document.createElement('div');
+                grid.className = 'sbj-gallery-grid sbj-gallery-grid--full';
+                imgs.forEach(function (n, i) {
+                    var url = base + 'gallery-' + n + '.webp';
+                    var alt = 'Slayd by Jade — style ' + (i + 1);
+                    var a   = document.createElement('a');
+                    a.href  = url;
+                    a.className = 'sbj-gallery-item sbj-reveal';
+                    a.setAttribute('data-lightbox', 'gallery');
+                    a.setAttribute('aria-label', alt);
+                    a.innerHTML = '<img src="' + url + '" alt="' + alt
+                        + '" class="sbj-gallery-item__img" loading="lazy" decoding="async">'
+                        + '<div class="sbj-gallery-item__overlay" aria-hidden="true">'
+                        + '<span class="sbj-gallery-item__view-label">View</span></div>';
+                    grid.appendChild(a);
+                });
+                gallerySection.innerHTML = '';
+                gallerySection.appendChild(grid);
+                var vWrap = document.createElement('div');
+                vWrap.className = 'sbj-gallery-videos';
+                vWrap.setAttribute('aria-label', 'Video gallery');
+                videos.forEach(function (vid, i) {
+                    var d = document.createElement('div');
+                    d.className = 'sbj-gallery-video sbj-reveal';
+                    d.innerHTML = '<video controls preload="none" class="sbj-gallery-video__player"'
+                        + ' aria-label="Slayd by Jade — video ' + (i + 1) + '">'
+                        + '<source src="' + base + vid + '" type="video/mp4"></video>';
+                    vWrap.appendChild(d);
+                });
+                gallerySection.appendChild(vWrap);
+            }
+        }
+
+        // Homepage preview — replace stale old-format images (gallery-01.webp etc.)
+        var previewGrid = document.querySelector('.sbj-gallery-grid--preview');
+        if (previewGrid) {
+            var firstImg     = previewGrid.querySelector('img');
+            var previewGood  = firstImg && /\/gallery-[1-6]\.webp/.test(firstImg.getAttribute('src'));
+            if (!previewGood) {
+                var galleryHref = window.location.origin + '/gallery';
+                previewGrid.innerHTML = '';
+                [1,2,3,4,5,6].forEach(function (n, i) {
+                    var url = base + 'gallery-' + n + '.webp';
+                    var alt = 'Slayd by Jade — style ' + (i + 1);
+                    var a   = document.createElement('a');
+                    a.href  = galleryHref;
+                    a.className = 'sbj-gallery-item sbj-reveal';
+                    a.setAttribute('aria-label', alt);
+                    a.innerHTML = '<img src="' + url + '" alt="' + alt
+                        + '" class="sbj-gallery-item__img" loading="lazy" decoding="async">'
+                        + '<div class="sbj-gallery-item__overlay" aria-hidden="true">'
+                        + '<span class="sbj-gallery-item__view-label">View</span></div>';
+                    previewGrid.appendChild(a);
+                });
+            }
+        }
+    })();
+
     // ─── Sticky header ───────────────────────────────────────────────────────
     var header = document.getElementById('sbj-header');
     if (header) {
