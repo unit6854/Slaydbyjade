@@ -1,44 +1,21 @@
 name: Deploy Theme to Hostinger
 
+# FTP deploy does NOT work on Hostinger Managed WordPress — FTP is disconnected
+# from the real file system. Deployment is done manually via hPanel Git integration.
+#
+# Deploy workflow:
+#   1. git push (triggers this workflow — just validates the push)
+#   2. hPanel → Git → click Deploy
+#   3. WP Admin → LiteSpeed Cache → Purge All
+
 on:
   push:
     branches:
       - main
 
 jobs:
-  deploy:
+  notify:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v4
-
-      - name: Deploy via FTP
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          server: ${{ secrets.FTP_HOST }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          server-dir: ${{ secrets.REMOTE_PATH }}
-          protocol: ftp
-          port: 21
-          exclude: |
-            **/.git*
-            **/.git*/**
-            **/node_modules/**
-
-      - name: Purge LiteSpeed Cache
-        run: |
-          WP_CRED="slaydjade:${{ secrets.WP_APP_PASSWORD }}"
-          # Touch key pages so WordPress fires its cache-purge hooks
-          for PAGE_ID in 5 9; do
-            curl -s -o /dev/null -X POST \
-              "https://slaydbyjade.com/wp-json/wp/v2/pages/$PAGE_ID" \
-              -u "$WP_CRED" \
-              -H "Content-Type: application/json" \
-              -d "{\"date_modified\":\"$(date -u +%Y-%m-%dT%H:%M:%S)\"}"
-          done
-          # Also try the theme REST endpoint (works once OPcache validates)
-          curl -s -o /dev/null -X POST \
-            "https://slaydbyjade.com/wp-json/slaydbyjade/v1/purge?key=${{ secrets.PURGE_KEY }}" \
-            -H "Content-Type: application/json"
+      - name: Push received
+        run: echo "Push to main received. Go to hPanel Git and click Deploy, then run LiteSpeed Cache Purge All in WP Admin."

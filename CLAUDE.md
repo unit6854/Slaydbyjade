@@ -1,28 +1,24 @@
 # Slayd by Jade — Claude Code Project Notes
 
-## How to Deploy PHP Changes to Live Site
+## Deploy Workflow (3 steps every time)
 
-Git push → GitHub Actions FTP deploys to real path:
-`/home/u734858704/public_html/wp-content/themes/slaydbyjade/`
-GitHub secret `REMOTE_PATH` = `wp-content/themes/slaydbyjade/`
-(FTP root is already inside public_html — no prefix needed)
+1. `git push` to main
+2. **hPanel → Git → click Deploy** (Hostinger hPanel Git integration)
+3. **WP Admin → LiteSpeed Cache → Purge All** — https://slaydbyjade.com/wp-admin/admin.php?page=litespeed-cache
 
-After every deploy: **WP Admin → LiteSpeed Cache → Dashboard → Purge All** (clears OPcache + page cache — mandatory or PHP changes won't show).
+**FTP does NOT work** for deploying to this site. The FTP credentials expose a directory that is completely disconnected from the real WordPress file system on Hostinger Managed WordPress.
 
-### If a PHP change isn't showing after deploy:
-- Run Purge All in WP Admin → LiteSpeed Cache
-- If still stuck: WP Admin → Theme File Editor → paste file → Update File (confirmed working, bypasses everything)
-
-### Theme File Editor (always works for PHP):
-https://slaydbyjade.com/wp-admin/theme-editor.php
+### If a change still isn't showing after deploy + purge:
+- WP Admin → Appearance → Theme File Editor → paste the file → Update File
+- This writes directly to the real PHP path and always works as a fallback
 
 ---
 
 ## Credentials
 
-**NEVER commit credentials here.** All credentials are stored in GitHub Secrets and Claude memory (`reference_slayd_deployment.md`).
+**Never commit credentials to this file.** Stored in Claude memory (`reference_slayd_deployment.md`).
 
-- FTP: `u734858704` @ `ftp://slaydbyjade.com` port 21 (plain FTP, not FTPS)
+- FTP: `u734858704` @ `ftp://slaydbyjade.com` port 21 — **dead for deploys, do not use**
 - WP Admin: https://slaydbyjade.com/wp-admin/ (user: slaydjade)
 - WP REST: https://slaydbyjade.com/wp-json/
 
@@ -34,7 +30,7 @@ Live at `https://slaydbyjade.com/wp-content/uploads/2026/05/`:
 - `gallery-1.webp` through `gallery-10.webp`
 - `gallery-video-1.mp4`, `gallery-video-2.mp4`
 
-**Always hardcode image names in templates — do NOT use glob().** Glob fails on this server.
+**Always hardcode image names in templates — never use glob().** Glob fails on this server.
 
 ---
 
