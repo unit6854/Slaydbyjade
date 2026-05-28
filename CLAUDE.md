@@ -2,14 +2,13 @@
 
 ## Deploy Workflow
 
-1. `git push` to main — hPanel Git auto-deploys to `public_html/wp-content/themes/slaydbyjade/`
-2. **WP Admin → LiteSpeed Cache → Purge All** — https://slaydbyjade.com/wp-admin/admin.php?page=litespeed-cache
+1. `git push` to main (version control only — does NOT auto-deploy to live site)
+2. Copy changed files via **WP Admin → Appearance → Theme File Editor** → Update File
+3. **WP Admin → LiteSpeed Cache → Purge All**
 
-**FTP does NOT work** for deploying to this site. The FTP credentials expose a directory that is completely disconnected from the real WordPress file system on Hostinger Managed WordPress.
+**WARNING — hPanel Git auto-deploy is DISABLED.** It deploys theme files to public_html root and overwrites WordPress core files (index.php), breaking the entire site. Do not re-enable.
 
-### If a change still isn't showing after deploy + purge:
-- WP Admin → Appearance → Theme File Editor → paste the file → Update File
-- This writes directly to the real PHP path and always works as a fallback
+**FTP also does NOT work** — FTP path is disconnected from real WordPress files on Hostinger Managed WordPress.
 
 ---
 
