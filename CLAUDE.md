@@ -1,10 +1,9 @@
 # Slayd by Jade — Claude Code Project Notes
 
-## Deploy Workflow (3 steps every time)
+## Deploy Workflow
 
-1. `git push` to main
-2. **hPanel → Git → click Deploy** (Hostinger hPanel Git integration)
-3. **WP Admin → LiteSpeed Cache → Purge All** — https://slaydbyjade.com/wp-admin/admin.php?page=litespeed-cache
+1. `git push` to main — hPanel Git auto-deploys to `public_html/wp-content/themes/slaydbyjade/`
+2. **WP Admin → LiteSpeed Cache → Purge All** — https://slaydbyjade.com/wp-admin/admin.php?page=litespeed-cache
 
 **FTP does NOT work** for deploying to this site. The FTP credentials expose a directory that is completely disconnected from the real WordPress file system on Hostinger Managed WordPress.
 
